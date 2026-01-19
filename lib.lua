@@ -1,4 +1,6 @@
--- Добавьте этот код в раздел exports после export type Keybind
+-- ===========================
+-- ЧАСТЬ 1: Добавьте в раздел Export Types (после export type Keybind)
+-- ===========================
 
 export type Textbox = {
 	Name: string,
@@ -10,7 +12,9 @@ export type Textbox = {
 	ClearOnFocus: boolean,
 }
 
--- Добавьте AddTextbox в export type Elements после AddKeybind
+-- ===========================
+-- ЧАСТЬ 2: Обновите export type Elements (замените существующий)
+-- ===========================
 
 export type Elements = {
 	AddToggle: (self,Config: Toggle) -> {
@@ -34,7 +38,10 @@ export type Elements = {
 	},
 }
 
--- Добавьте эту функцию в раздел Fatality:CreateElements после функции AddKeybind
+-- ===========================
+-- ЧАСТЬ 3: Добавьте эту функцию в function Fatality:CreateElements
+-- Добавьте ПОСЛЕ функции elements:AddKeybind (перед return elements)
+-- ===========================
 
 function elements:AddTextbox(Config: Textbox)
 	Config = Config or {};
@@ -221,4 +228,18 @@ function elements:AddTextbox(Config: Textbox)
 	end;
 
 	return Respons;
-end;
+end
+
+-- ===========================
+-- ИНСТРУКЦИЯ ПО УСТАНОВКЕ:
+-- ===========================
+--[[
+1. Откройте файл lib.luau на GitHub
+2. Найдите строку "export type Keybind" и добавьте ПОСЛЕ неё код из ЧАСТИ 1
+3. Найдите "export type Elements" и ЗАМЕНИТЕ его на код из ЧАСТИ 2
+4. Найдите функцию "function elements:AddKeybind" 
+5. После её завершения (перед "return elements") добавьте код из ЧАСТИ 3
+6. Сохраните и закоммитьте изменения на GitHub
+
+Теперь AddTextbox будет доступен в библиотеке!
+]]
