@@ -1,6 +1,13 @@
--- ===========================
--- ЧАСТЬ 1: Добавьте в раздел Export Types (после export type Keybind)
--- ===========================
+--[[
+    ИНСТРУКЦИЯ ПО ДОБАВЛЕНИЮ AddTextbox В lib.lua
+    
+    Откройте файл lib.lua на GitHub и выполните следующие шаги:
+]]
+
+-- ========================================
+-- ШАГ 1: Найдите строку "export type Keybind" (примерно строка 100-150)
+-- ПОСЛЕ неё добавьте:
+-- ========================================
 
 export type Textbox = {
 	Name: string,
@@ -12,9 +19,10 @@ export type Textbox = {
 	ClearOnFocus: boolean,
 }
 
--- ===========================
--- ЧАСТЬ 2: Обновите export type Elements (замените существующий)
--- ===========================
+-- ========================================
+-- ШАГ 2: Найдите "export type Elements" (примерно строка 50-100)
+-- ЗАМЕНИТЕ весь блок на этот:
+-- ========================================
 
 export type Elements = {
 	AddToggle: (self,Config: Toggle) -> {
@@ -38,10 +46,11 @@ export type Elements = {
 	},
 }
 
--- ===========================
--- ЧАСТЬ 3: Добавьте эту функцию в function Fatality:CreateElements
--- Добавьте ПОСЛЕ функции elements:AddKeybind (перед return elements)
--- ===========================
+-- ========================================
+-- ШАГ 3: Найдите функцию "function Fatality:CreateElements"
+-- Внутри найдите "function elements:AddKeybind" (примерно строка 2000-2500)
+-- ПОСЛЕ окончания этой функции (перед "return elements") добавьте:
+-- ========================================
 
 function elements:AddTextbox(Config: Textbox)
 	Config = Config or {};
@@ -230,16 +239,21 @@ function elements:AddTextbox(Config: Textbox)
 	return Respons;
 end
 
--- ===========================
--- ИНСТРУКЦИЯ ПО УСТАНОВКЕ:
--- ===========================
 --[[
-1. Откройте файл lib.luau на GitHub
-2. Найдите строку "export type Keybind" и добавьте ПОСЛЕ неё код из ЧАСТИ 1
-3. Найдите "export type Elements" и ЗАМЕНИТЕ его на код из ЧАСТИ 2
-4. Найдите функцию "function elements:AddKeybind" 
-5. После её завершения (перед "return elements") добавьте код из ЧАСТИ 3
-6. Сохраните и закоммитьте изменения на GitHub
-
-Теперь AddTextbox будет доступен в библиотеке!
+    ========================================
+    ВАЖНО!
+    ========================================
+    
+    После добавления всех 3 частей:
+    1. Сохраните файл на GitHub (Commit changes)
+    2. Подождите 1-2 минуты
+    3. Запустите скрипт снова
+    
+    Если всё равно не работает, добавьте timestamp к URL:
+    
+    local Fatality = loadstring(game:HttpGet(
+        "https://raw.githubusercontent.com/mmr1337/libAsync/refs/heads/main/lib.lua?v=" .. os.time()
+    ))();
+    
+    Это заставит загрузить новую версию файла!
 ]]
